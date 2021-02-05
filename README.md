@@ -1,4 +1,4 @@
-# BigDataDevelopmentInterviewMaterials
+# BigDataMaterials
 大数据开发工程师面试需要准备的资料,根据个人工作经验总结
 
 ## 算法
