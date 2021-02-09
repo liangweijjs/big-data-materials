@@ -31,3 +31,30 @@ MLlib 是 Spark 提供的一个机器学习算法库。MLlib 不仅提供了模�
 - Spark GraphX
 
 GraphX 是 Spark 面向图计算提供的框架与算法库。
+
+```java
+import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
+
+object WordCount {
+
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf()
+    conf.setAppName("WordCount")
+    conf.setMaster("local[2]")
+
+    val sc = new SparkContext(conf)
+
+    val fileRDD: RDD[String] = sc.textFile("./src/main/scala/data/")
+    val wordRDD = fileRDD.flatMap(_.split(" "))
+    val wordMapRDD = wordRDD.map((_, 1))
+    val wordCountRDD = wordMapRDD.reduceByKey((v1, v2) => v1 + v2)
+    wordCountRDD.foreach(res => println(res))
+
+    sc.stop()
+
+  }
+
+}
+
+```
